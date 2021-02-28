@@ -1,6 +1,6 @@
 ## SOBRE 
 
-Esté código, pertencente a equipe Under Ctrl 14391 tem como base o SDK público da temporada Ultimate Goal (2020/2021) de FTC
+Esté código, pertencente a equipe Under Ctrl 14391, tem como base o SDK público da temporada Ultimate Goal (2020/2021) de FTC
 
  * Queremos manter esse código atualizado com a versão mais recente do repositório base.
 
