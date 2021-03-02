@@ -6,17 +6,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name=" Servo toggle", group="Linear Opmode")
-public class servoToggle extends LinearOpMode {
+public class Servo1 extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
     //Declaração dos Servos
     Servo servoDireita = null;
     Servo servoEsquerda = null;
-
-    //Variáveis para toggle
-    boolean antB = false;
-    boolean toggle = true;
 
     @Override
     public void runOpMode() {
@@ -45,18 +41,10 @@ public class servoToggle extends LinearOpMode {
             //Referenciando a variável buttonA ao botão a do gamepad
             buttonA = gamepad1.a;
 
-            /* Este é um toggle tirado do reddit com uma miníma modificação nossa.
-             * https://www.reddit.com/r/FTC/comments/3z75ou/use_one_button_to_onoff/
-             * https://www.reddit.com/r/FTC/comments/enembp/programming_toggles/
-             */
-            if(buttonA && !antB) {
-                //Operador ternário, mais prático que dois ou + if's
-                servoPos = toggle ? 1 : 0;
-                toggle = !toggle;
-                antB = true;
-            } else if(!buttonA) {
-                antB = false;
-            }
+            //Manda o valor 1 apenas quando botão segurado
+            if(buttonA) {
+                servoPos = 1;
+            } else servoPos = 0;
 
             //Manda o valor para os servos
             servoDireita.setPosition(servoPos);
