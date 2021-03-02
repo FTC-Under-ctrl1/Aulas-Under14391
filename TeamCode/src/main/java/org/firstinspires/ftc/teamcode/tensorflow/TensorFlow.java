@@ -66,7 +66,11 @@ public class TensorFlow extends PrincipalTfTime {
      * and paste it in to your code on the next line, between the double quotes.
      */
     private static final String VUFORIA_KEY =
-            " -- YOUR NEW VUFORIA KEY GOES HERE  --- ";
+            "AfrEUND/////AAABmb3+6rhWKECdlUodBbFnp8QLFw6OQhSxoJGRIa7Bndz1HmMV6ZHyLPQkwG1eW3" +
+                    "DNQCfgMuG0K+KLowbhfm/9wVNC0mbEjtOj9GnTq+2UN90gAI+1UbL/Z4HnETttdNGu7Vefc4rdHPT" +
+                    "8/nkNzOpcqZMFNm6tybXNOazYIyg+LV6FuZVWU6OJOVVB6ZwnF3DVLUBpyf6PJyufoKHf7rCANK" +
+                    "sqZaZd3RJM+0+nGTbhx54FO71C1GIXhxTPbrEurNWa5SSzK4S570xCQXUACm7LRjHB7li6T3L5HMO" +
+                    "fZTiOFQ9ZmwkxIJ5kVq0xytlaHz7bb3p7KuhUa1YbtAXmXA1AbHMBs4ZVH34HKnanN88RTsLJ";
 
     /*
      * is the variable we will use to store our instance of the Vuforia
