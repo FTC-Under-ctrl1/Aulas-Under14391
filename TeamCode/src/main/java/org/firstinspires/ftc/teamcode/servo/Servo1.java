@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp(name="Servo", group="Linear Opmode")
 public class Servo1 extends LinearOpMode {
 
-    private ElapsedTime runtime = new ElapsedTime();
+    ElapsedTime runtime = new ElapsedTime();
 
     //Declaração dos Servos
     Servo servoDireita = null;
