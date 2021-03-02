@@ -44,14 +44,15 @@ public class PrincipalTfTime extends LinearOpMode {
 
         sleep(5000);
         int pilhaArg = new TensorFlow().leituraArgolas();
-
-        switch(pilhaArg) {
-            case 1:
-                telemetry.addData("leitura (1 arg) ", "1 onion ring :)");
-            case 4:
-                telemetry.addData("leitura (4 arg) ", "4 onions :D");
-            default:
-                telemetry.addData("leitura (0 arg) ", ":( no onion ring");
+        while (opModeIsActive()) {
+            switch (pilhaArg) {
+                case 1:
+                    telemetry.addData("leitura (1 arg) ", "1 onion ring :)");
+                case 4:
+                    telemetry.addData("leitura (4 arg) ", "4 onions :D");
+                default:
+                    telemetry.addData("leitura (0 arg) ", ":( no onion ring");
+            }
         }
     }
 }
