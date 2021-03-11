@@ -87,8 +87,10 @@ public class TensorFlow extends PrincipalTfTime {
     private TFObjectDetector tfod;
 
     String pilhaArg = " ";
-    public int leituraArgolas() {
+    public int leituraArgolas(HardwareMap hardwareMap1) {
 
+        initVuforia();
+        initTfod(hardwareMap1);
         /*
          * Activate TensorFlow Object Detection before we wait for the start command.
          * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
@@ -155,9 +157,9 @@ public class TensorFlow extends PrincipalTfTime {
     /**
      * Initialize the TensorFlow Object Detection engine.
      */
-    public void initTfod(HardwareMap hardware) {
-        int tfodMonitorViewId = hardware.appContext.getResources().getIdentifier(
-            "tfodMonitorViewId", "id", hardware.appContext.getPackageName());
+    public void initTfod(HardwareMap hardwareMap1) {
+        int tfodMonitorViewId = hardwareMap1.appContext.getResources().getIdentifier(
+            "tfodMonitorViewId", "id", hardwareMap1.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfodParameters.minResultConfidence = 0.8f;
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);

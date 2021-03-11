@@ -40,14 +40,11 @@ public class PrincipalTfTime extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        new TensorFlow().initVuforia();
-        new TensorFlow().initTfod(hardwareMap);
-
         waitForStart();
 
         sleep(5000);
 
-        int pilhaArg = new TensorFlow().leituraArgolas();
+        int pilhaArg = new TensorFlow().leituraArgolas(hardwareMap);
 
         telemetry.addData("quantas argolas", pilhaArg);
 
