@@ -31,7 +31,6 @@ package org.firstinspires.ftc.teamcode.tensorflow;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 @TeleOp(name="Principal Tf", group="Linear Opmode")
 public class PrincipalTfTime extends LinearOpMode {
@@ -49,6 +48,9 @@ public class PrincipalTfTime extends LinearOpMode {
         sleep(5000);
 
         int pilhaArg = new TensorFlow().leituraArgolas();
+
+        telemetry.addData("quantas argolas", pilhaArg);
+
         while (opModeIsActive()) {
             switch (pilhaArg) {
                 case 1:

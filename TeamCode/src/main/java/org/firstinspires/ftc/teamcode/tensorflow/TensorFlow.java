@@ -86,7 +86,7 @@ public class TensorFlow extends PrincipalTfTime {
      */
     private TFObjectDetector tfod;
 
-    String pilhaArg;
+    String pilhaArg = " ";
     public int leituraArgolas() {
 
         /*
