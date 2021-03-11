@@ -50,7 +50,7 @@ import java.util.List;
  * is explained below.
  */
 
-public class TensorFlow extends PrincipalTfTime {
+public class TensorFlow {
     private static final String TFOD_MODEL_ASSET = "UltimateGoal.tflite";
     private static final String LABEL_FIRST_ELEMENT = "Quad";
     private static final String LABEL_SECOND_ELEMENT = "Single";
@@ -111,19 +111,13 @@ public class TensorFlow extends PrincipalTfTime {
             // the last time that call was made.
             List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
             if (updatedRecognitions != null) {
-                telemetry.addData("# Object Detected", updatedRecognitions.size());
 
                 // step through the list of recognitions and display boundary info.
                 int i = 0;
                 for (Recognition recognition : updatedRecognitions) {
                     pilhaArg = recognition.getLabel();
-                    telemetry.addData(String.format("label (%d)", i), pilhaArg);
-                    telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
-                            recognition.getLeft(), recognition.getTop());
-                    telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
-                            recognition.getRight(), recognition.getBottom());
                 }
-                telemetry.update();
+
             } else {
                 pilhaArg = "0";
             }
