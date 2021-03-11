@@ -34,7 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp(name="Principal Tf", group="Linear Opmode")
 public class PrincipalTfTime extends LinearOpMode {
-
+    TensorFlow eng = new TensorFlow();
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -42,8 +42,11 @@ public class PrincipalTfTime extends LinearOpMode {
 
         waitForStart();
 
+        eng.initTf(hardwareMap);
+
         sleep(5000);
-        int pilhaArg = new TensorFlow().leituraArgolas();
+
+        int pilhaArg = eng.leituraArgolas();
         while (opModeIsActive()) {
             switch (pilhaArg) {
                 case 1:

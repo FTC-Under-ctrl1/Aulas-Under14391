@@ -29,6 +29,8 @@
 
 package org.firstinspires.ftc.teamcode.tensorflow;
 
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
@@ -84,11 +86,14 @@ public class TensorFlow extends PrincipalTfTime {
      */
     private TFObjectDetector tfod;
 
-    public int leituraArgolas() {
+    public void initTf(HardwareMap hard) {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.
         initVuforia();
-        initTfod();
+        initTfod(hard);
+    }
+    public int leituraArgolas() {
+
 
         /*
          * Activate TensorFlow Object Detection before we wait for the start command.
@@ -153,9 +158,9 @@ public class TensorFlow extends PrincipalTfTime {
     /**
      * Initialize the TensorFlow Object Detection engine.
      */
-    private void initTfod() {
-        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
-            "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+    private void initTfod(HardwareMap hardware) {
+        int tfodMonitorViewId = hardware.appContext.getResources().getIdentifier(
+            "tfodMonitorViewId", "id", hardware.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfodParameters.minResultConfidence = 0.8f;
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
