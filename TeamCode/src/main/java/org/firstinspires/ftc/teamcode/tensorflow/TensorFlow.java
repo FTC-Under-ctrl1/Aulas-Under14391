@@ -86,23 +86,15 @@ public class TensorFlow extends PrincipalTfTime {
      */
     private TFObjectDetector tfod;
 
-    public void initTf(HardwareMap hard) {
-        // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
-        // first.
-        initVuforia();
-        initTfod(hard);
-    }
+    String pilhaArg;
     public int leituraArgolas() {
-
 
         /*
          * Activate TensorFlow Object Detection before we wait for the start command.
          * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
          **/
-        String pilhaArg = "0";
-        if (tfod != null) {
+        if(tfod != null) {
             tfod.activate();
-
             // The TensorFlow software will scale the input images from the camera to a lower resolution.
             // This can result in lower detection accuracy at longer distances (> 55cm or 22").
             // If your target is at distance greater than 50 cm (20") you can adjust the magnification value
@@ -110,7 +102,9 @@ public class TensorFlow extends PrincipalTfTime {
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
             tfod.setZoom(2.5, 16.0 / 9.0);
+        }
 
+        if (tfod != null) {
             // getUpdatedRecognitions() will return null if no new information is available since
             // the last time that call was made.
             List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
@@ -128,7 +122,10 @@ public class TensorFlow extends PrincipalTfTime {
                             recognition.getRight(), recognition.getBottom());
                 }
                 telemetry.update();
+            } else {
+                pilhaArg = "0";
             }
+
             tfod.deactivate();
         }
         return Integer.parseInt(pilhaArg);
@@ -140,7 +137,7 @@ public class TensorFlow extends PrincipalTfTime {
     /**
      * Initialize the Vuforia localization engine.
      */
-    private void initVuforia() {
+    public void initVuforia() {
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
          */
@@ -158,7 +155,7 @@ public class TensorFlow extends PrincipalTfTime {
     /**
      * Initialize the TensorFlow Object Detection engine.
      */
-    private void initTfod(HardwareMap hardware) {
+    public void initTfod(HardwareMap hardware) {
         int tfodMonitorViewId = hardware.appContext.getResources().getIdentifier(
             "tfodMonitorViewId", "id", hardware.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
