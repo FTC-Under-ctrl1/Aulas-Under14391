@@ -20,10 +20,10 @@ public class PrincipalTf extends LinearOpMode {
         while(opModeIsActive()) {
             String quantArg = tfEngine.pilhaArg;
             switch (quantArg) {
-                case "1":
+                case "Single":
                     telemetry.addData("Quantidade", "Uma argola :)");
                     break;
-                case "4":
+                case "Quad":
                     telemetry.addData("Quantidade", "Quatro argola :D");
                     break;
                 default:
