@@ -15,20 +15,12 @@ public class PrincipalTf extends LinearOpMode {
 
         waitForStart();
 
-        tfEngine.quantidadeDeArgolas(telemetry);
+        tfEngine.quantidadeDeArgolas();
 
         while(opModeIsActive()) {
             String quantArg = tfEngine.pilhaArg;
-            switch (quantArg) {
-                case "Single":
-                    telemetry.addData("Quantidade", "Uma argola :)");
-                    break;
-                case "Quad":
-                    telemetry.addData("Quantidade", "Quatro argola :D");
-                    break;
-                default:
-                    telemetry.addData("Quantidade", "Nenhuma argola :(");
-                    break;
+            if (quantArg != null) {
+                telemetry.addData("Quantidade", quantArg);
             }
         }
     }
