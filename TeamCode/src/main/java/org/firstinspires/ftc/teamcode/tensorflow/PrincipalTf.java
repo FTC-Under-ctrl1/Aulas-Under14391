@@ -15,7 +15,7 @@ public class PrincipalTf extends LinearOpMode {
 
         waitForStart();
 
-        tfEngine.quantidadeDeArgolas();
+        tfEngine.quantidadeDeArgolas(telemetry);
 
         while(opModeIsActive()) {
             String quantArg = tfEngine.pilhaArg;
@@ -28,6 +28,7 @@ public class PrincipalTf extends LinearOpMode {
                     break;
                 default:
                     telemetry.addData("Quantidade", "Nenhuma argola :(");
+                    break;
             }
         }
     }
