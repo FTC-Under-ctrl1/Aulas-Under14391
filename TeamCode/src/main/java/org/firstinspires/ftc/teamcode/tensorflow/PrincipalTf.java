@@ -15,7 +15,9 @@ public class PrincipalTf extends LinearOpMode {
 
         waitForStart();
 
-        tfEngine.quantidadeDeArgolas();
+        while(tfEngine.pilhaArg == null) {
+            tfEngine.quantidadeDeArgolas();
+        }
 
         while(opModeIsActive()) {
             String quantArg = tfEngine.pilhaArg;

@@ -56,18 +56,7 @@ public class TensorFlow {
     private static final String LABEL_FIRST_ELEMENT = "Quad";
     private static final String LABEL_SECOND_ELEMENT = "Single";
 
-    /*
-     * IMPORTANT: You need to obtain your own license key to use Vuforia. The string below with which
-     * 'parameters.vuforiaLicenseKey' is initialized is for illustration only, and will not function.
-     * A Vuforia 'Development' license key, can be obtained free of charge from the Vuforia developer
-     * web site at https://developer.vuforia.com/license-manager.
-     *
-     * Vuforia license keys are always 380 characters long, and look as if they contain mostly
-     * random data. As an example, here is a example of a fragment of a valid key:
-     *      ... yIgIzTqZ4mWjk9wd3cZO9T1axEqzuhxoGlfOOI2dRzKS4T0hQ8kT ...
-     * Once you've obtained a license key, copy the string from the Vuforia web site
-     * and paste it in to your code on the next line, between the double quotes.
-     */
+
     private static final String VUFORIA_KEY =
             "AfrEUND/////AAABmb3+6rhWKECdlUodBbFnp8QLFw6OQhSx" +
                     "oJGRIa7Bndz1HmMV6ZHyLPQkwG1eW3DNQCfgMuG0K+KLowbhfm/9wVNC0mbEjtOj9GnTq+2U" +
@@ -112,30 +101,27 @@ public class TensorFlow {
             tfod.setZoom(2.5, 16.0/9.0);
         }
     }
-
+ public void desativar() {
+     if (tfod != null) {
+         tfod.deactivate();
+     }
+ }
 
     public void quantidadeDeArgolas() {
-        if (tfod != null) {
-            // getUpdatedRecognitions() will return null if no new information is available since
-            // the last time that call was made.
-            List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
-            if (updatedRecognitions != null) {
-                updatedRecognitions.size();
+            if (tfod != null) {
+                // getUpdatedRecognitions() will return null if no new information is available since
+                // the last time that call was made.
+                List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+                if (updatedRecognitions != null) {
+                    updatedRecognitions.size();
 
-                // step through the list of recognitions and display boundary info.
-                int i = 0;
-                for (Recognition recognition : updatedRecognitions) {
+                    // step through the list of recognitions and display boundary info.
+                    int i = 0;
+                    for (Recognition recognition : updatedRecognitions) {
                         pilhaArg = recognition.getLabel();
-                        recognition.getLeft();
-                        recognition.getTop();
-                        recognition.getRight();
-                        recognition.getBottom();
+                    }
                 }
             }
-        }
-        if (tfod != null) {
-            tfod.deactivate();
-        }
     }
 
 
