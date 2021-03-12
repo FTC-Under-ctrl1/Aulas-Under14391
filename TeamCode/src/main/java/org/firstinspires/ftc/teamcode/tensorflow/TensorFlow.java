@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode.tensorflow;
 
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
@@ -49,7 +50,7 @@ import java.util.List;
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
-
+@TeleOp(name = "Concept: TensorFlow Object Detection", group = "Concept")
 public class TensorFlow {
     private static final String TFOD_MODEL_ASSET = "UltimateGoal.tflite";
     private static final String LABEL_FIRST_ELEMENT = "Quad";
@@ -68,72 +69,80 @@ public class TensorFlow {
      * and paste it in to your code on the next line, between the double quotes.
      */
     private static final String VUFORIA_KEY =
-            "AfrEUND/////AAABmb3+6rhWKECdlUodBbFnp8QLFw6OQhSxoJGRIa7Bndz1HmMV6ZHyLPQkwG1eW3" +
-                    "DNQCfgMuG0K+KLowbhfm/9wVNC0mbEjtOj9GnTq+2UN90gAI+1UbL/Z4HnETttdNGu7Vefc4rdHPT" +
-                    "8/nkNzOpcqZMFNm6tybXNOazYIyg+LV6FuZVWU6OJOVVB6ZwnF3DVLUBpyf6PJyufoKHf7rCANK" +
-                    "sqZaZd3RJM+0+nGTbhx54FO71C1GIXhxTPbrEurNWa5SSzK4S570xCQXUACm7LRjHB7li6T3L5HMO" +
-                    "fZTiOFQ9ZmwkxIJ5kVq0xytlaHz7bb3p7KuhUa1YbtAXmXA1AbHMBs4ZVH34HKnanN88RTsLJ";
+            "AfrEUND/////AAABmb3+6rhWKECdlUodBbFnp8QLFw6OQhSx" +
+                    "oJGRIa7Bndz1HmMV6ZHyLPQkwG1eW3DNQCfgMuG0K+KLowbhfm/9wVNC0mbEjtOj9GnTq+2U" +
+                    "N90gAI+1UbL/Z4HnETttdNGu7Vefc4rdHPT8/nkNzOpcqZMFNm6tybXNOazYIyg+LV6FuZVWU6" +
+                    "OJOVVB6ZwnF3DVLUBpyf6PJyufoKHf7rCANKsqZaZd3RJM+0+nGTbhx54FO71C1GIXhxTP" +
+                    "brEurNWa5SSzK4S570xCQXUACm7LRjHB7li6T3L5HMOfZTiOFQ9ZmwkxIJ5kVq0xyt" +
+                    "laHz7bb3p7KuhUa1YbtAXmXA1AbHMBs4ZVH34HKnanN88RTsLJ";
 
     /*
-     * is the variable we will use to store our instance of the Vuforia
+     * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
      * localization engine.
      */
     private VuforiaLocalizer vuforia;
 
     /*
-     * is the variable we will use to store our instance of the TensorFlow Object
+     * {@link #tfod} is the variable we will use to store our instance of the TensorFlow Object
      * Detection engine.
      */
     private TFObjectDetector tfod;
 
-    String pilhaArg = " ";
-    public int leituraArgolas(HardwareMap hardwareMap1) {
+    String pilhaArg;
 
+    public void initEngine(HardwareMap hardwareMap) {
+        // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
+        // first.
         initVuforia();
-        initTfod(hardwareMap1);
+        initTfod(hardwareMap);
+
         /*
          * Activate TensorFlow Object Detection before we wait for the start command.
          * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
-         **/
-        if(tfod != null) {
+         */
+        if (tfod != null) {
             tfod.activate();
+
             // The TensorFlow software will scale the input images from the camera to a lower resolution.
             // This can result in lower detection accuracy at longer distances (> 55cm or 22").
             // If your target is at distance greater than 50 cm (20") you can adjust the magnification value
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(2.5, 16.0 / 9.0);
+            tfod.setZoom(2.5, 16.0/9.0);
         }
+    }
 
+
+    public void quantidadeDeArgolas() {
         if (tfod != null) {
             // getUpdatedRecognitions() will return null if no new information is available since
             // the last time that call was made.
             List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
             if (updatedRecognitions != null) {
+                updatedRecognitions.size();
 
                 // step through the list of recognitions and display boundary info.
                 int i = 0;
                 for (Recognition recognition : updatedRecognitions) {
-                    pilhaArg = recognition.getLabel();
+                        pilhaArg = recognition.getLabel();
+                        recognition.getLeft();
+                        recognition.getTop();
+                        recognition.getRight();
+                        recognition.getBottom();
                 }
-
-            } else {
-                pilhaArg = "0";
             }
-
+        }
+        if (tfod != null) {
             tfod.deactivate();
         }
-        return Integer.parseInt(pilhaArg);
     }
 
 
-
-
-    /**
+    /*
      * Initialize the Vuforia localization engine.
      */
-    public void initVuforia() {
+    private void initVuforia() {
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
          */
@@ -148,12 +157,12 @@ public class TensorFlow {
         // Loading trackables is not necessary for the TensorFlow Object Detection engine.
     }
 
-    /**
+    /*
      * Initialize the TensorFlow Object Detection engine.
      */
-    public void initTfod(HardwareMap hardwareMap1) {
-        int tfodMonitorViewId = hardwareMap1.appContext.getResources().getIdentifier(
-            "tfodMonitorViewId", "id", hardwareMap1.appContext.getPackageName());
+    private void initTfod(HardwareMap hardwareMap) {
+        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
+            "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfodParameters.minResultConfidence = 0.8f;
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
