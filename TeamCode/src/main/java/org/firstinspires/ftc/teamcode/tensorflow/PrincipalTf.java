@@ -5,7 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp(name="TensorFlow Leitura", group="Linear Opmode")
 public class PrincipalTf extends LinearOpMode {
+
     TensorFlow tfEngine = new TensorFlow();
+
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Iniciado");
@@ -15,13 +17,13 @@ public class PrincipalTf extends LinearOpMode {
 
         waitForStart();
 
-        tfEngine.quantidadeDeArgolas();
+        String quantArg = tfEngine.quantidadeDeArgolas();
 
-        while(opModeIsActive()) {
-            String quantArg = tfEngine.pilhaArg;
-            if (quantArg != null) {
-                telemetry.addData("Quantidade", quantArg);
-            }
+
+        if (quantArg != null) {
+            telemetry.addData("Quantidade", quantArg);
+        } else  {
+            telemetry.addData("Quantidade", "null");
         }
     }
 }

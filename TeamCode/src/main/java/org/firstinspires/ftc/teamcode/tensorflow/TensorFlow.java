@@ -115,21 +115,23 @@ public class TensorFlow {
     }
 
 
-    public void quantidadeDeArgolas() {
+    public String quantidadeDeArgolas() {
         if (tfod != null) {
             // getUpdatedRecognitions() will return null if no new information is available since
             // the last time that call was made.
             List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+
             if (updatedRecognitions != null) {
-                updatedRecognitions.size());
+
+                updatedRecognitions.size();
 
                 // step through the list of recognitions and display boundary info.
-                int i = 0;
                 for (Recognition recognition : updatedRecognitions) {
                     pilhaArg = recognition.getLabel();
                 }
             }
         }
+        return pilhaArg;
     }
 
 
