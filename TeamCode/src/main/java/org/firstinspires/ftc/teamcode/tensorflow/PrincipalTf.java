@@ -11,6 +11,7 @@ public class PrincipalTf extends LinearOpMode {
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Iniciado");
+        telemetry.update();
 
         tfEngine.initEngine(hardwareMap);
 
