@@ -86,8 +86,6 @@ public class TensorFlow {
      */
     private TFObjectDetector tfod;
 
-    String pilhaArg;
-
     public void initEngine(HardwareMap hardwareMap) {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.
@@ -116,6 +114,7 @@ public class TensorFlow {
     }
 
     public String quantidadeDeArgolas() {
+        String pilhaArg = null;
         if (tfod != null) {
             // getUpdatedRecognitions() will return null if no new information is available since
             // the last time that call was made.

@@ -10,8 +10,7 @@ public class PrincipalTf extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-
-        telemetry.addData("INICIAR","BUGADO");
+        telemetry.addData("Status: ","Iniciado");
         telemetry.update();
         tfEngine.initEngine(hardwareMap);
 
@@ -22,16 +21,19 @@ public class PrincipalTf extends LinearOpMode {
 
         String quantArg = tfEngine.quantidadeDeArgolas();
 
-        telemetry.addData("Leitura:", "confirmada");
+        telemetry.addData("Leitura:", quantArg);
         telemetry.update();
 
-        while (opModeIsActive()) {
-            telemetry.update();
-            if (quantArg != null) {
-                telemetry.addData("Quantidade", quantArg);
-            } else {
-                telemetry.addData("Quantidade", "null");
-            }
+        switch(quantArg) {
+            case "Quad":
+                telemetry.addData("Quantidade:", "Quatro anéis de cebola :D");
+                break;
+            case "Single":
+                telemetry.addData("Quantidade:", "Um anél de cebola :)");
+                break;
+            default:
+                telemetry.addData("Quantidade:", "Nenhuma anél :(");
+                break;
         }
         tfEngine.deactivate();
     }
