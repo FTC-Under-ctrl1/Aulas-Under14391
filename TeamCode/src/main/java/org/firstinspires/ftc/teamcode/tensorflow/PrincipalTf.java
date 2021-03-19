@@ -10,23 +10,29 @@ public class PrincipalTf extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        telemetry.addData("Status", "Iniciado");
-        telemetry.update();
 
+        telemetry.addData("INICIAR","BUGADO");
+        telemetry.update();
         tfEngine.initEngine(hardwareMap);
 
         telemetry.addData("Status", "TensorFlow iniciado");
+        telemetry.update();
 
         waitForStart();
 
         String quantArg = tfEngine.quantidadeDeArgolas();
 
         telemetry.addData("Leitura:", "confirmada");
+        telemetry.update();
 
-        if (quantArg != null) {
-            telemetry.addData("Quantidade", quantArg);
-        } else  {
-            telemetry.addData("Quantidade", "null");
+        while (opModeIsActive()) {
+            telemetry.update();
+            if (quantArg != null) {
+                telemetry.addData("Quantidade", quantArg);
+            } else {
+                telemetry.addData("Quantidade", "null");
+            }
         }
+        tfEngine.deactivate();
     }
 }

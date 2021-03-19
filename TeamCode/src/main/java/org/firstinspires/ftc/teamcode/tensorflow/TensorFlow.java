@@ -29,11 +29,9 @@
 
 package org.firstinspires.ftc.teamcode.tensorflow;
 
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
@@ -51,7 +49,6 @@ import java.util.List;
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
-@TeleOp(name = "Concept: TensorFlow Object Detection", group = "Concept")
 public class TensorFlow {
     private static final String TFOD_MODEL_ASSET = "UltimateGoal.tflite";
     private static final String LABEL_FIRST_ELEMENT = "Quad";
@@ -114,6 +111,9 @@ public class TensorFlow {
         }
     }
 
+    public void deactivate(){
+        tfod.shutdown();
+    }
 
     public String quantidadeDeArgolas() {
         if (tfod != null) {
@@ -124,11 +124,12 @@ public class TensorFlow {
             if (updatedRecognitions != null) {
 
                 updatedRecognitions.size();
+                for (Recognition recognition : updatedRecognitions) {
+                    pilhaArg = recognition.getLabel();
+                }
             }
             // step through the list of recognitions and display boundary info.
-            for (Recognition recognition : updatedRecognitions) {
-                pilhaArg = recognition.getLabel();
-            }
+
         }
         return pilhaArg;
     }
