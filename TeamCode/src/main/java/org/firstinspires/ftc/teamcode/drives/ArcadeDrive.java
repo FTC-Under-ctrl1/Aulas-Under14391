@@ -39,11 +39,11 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp(name=" TeleOp ArcadeDrive", group="Linear Opmode")
 public class ArcadeDrive extends LinearOpMode {
     //Membros do código
-    private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor motorEsquerda = null;
-    private DcMotor motorDireita = null;
-    private DcMotor motorDireitoBack = null;
-    private DcMotor motorEsquerdoBack = null;
+    ElapsedTime runtime = new ElapsedTime();
+    DcMotor motorEsquerda = null;
+    DcMotor motorDireita = null;
+    DcMotor motorDireitoBack = null;
+    DcMotor motorEsquerdoBack = null;
 
     @Override
     public void runOpMode() {

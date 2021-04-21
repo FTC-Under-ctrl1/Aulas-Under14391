@@ -39,11 +39,11 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp(name=" TeleOp TankMode", group="Linear Opmode")
 public class TankOpMode extends LinearOpMode {
     // Declare OpMode members.
-    private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor motorEsquerda = null;
-    private DcMotor motorDireita = null;
-    private DcMotor motorDireitoBack = null;
-    private DcMotor motorEsquerdoBack = null;
+    ElapsedTime runtime = new ElapsedTime();
+    DcMotor motorEsquerda = null;
+    DcMotor motorDireita = null;
+    DcMotor motorDireitoBack = null;
+    DcMotor motorEsquerdoBack = null;
     @Override
     public void runOpMode() {
         double poderEsquerda;

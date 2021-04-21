@@ -21,18 +21,18 @@ public class PrincipalTf extends LinearOpMode {
 
         String quantArg = tfEngine.quantidadeDeArgolas();
 
-        telemetry.addData("Leitura:", quantArg);
+        telemetry.addData("Leitura", quantArg);
         telemetry.update();
 
         switch(quantArg) {
             case "Quad":
-                telemetry.addData("Quantidade:", "Quatro anéis de cebola :D");
+                telemetry.addData("Quantidade", "Quatro");
                 break;
             case "Single":
-                telemetry.addData("Quantidade:", "Um anél de cebola :)");
+                telemetry.addData("Quantidade", "Uma");
                 break;
             default:
-                telemetry.addData("Quantidade:", "Nenhuma anél :(");
+                telemetry.addData("Quantidade", "Nenhuma");
                 break;
         }
         tfEngine.deactivate();
