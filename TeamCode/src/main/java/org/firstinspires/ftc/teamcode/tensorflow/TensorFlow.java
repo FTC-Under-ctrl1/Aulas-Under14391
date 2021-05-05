@@ -114,7 +114,7 @@ public class TensorFlow {
     }
 
     public String quantidadeDeArgolas() {
-        String pilhaArg = null;
+        String pilhaArg = " ";
         if (tfod != null) {
             // getUpdatedRecognitions() will return null if no new information is available since
             // the last time that call was made.
